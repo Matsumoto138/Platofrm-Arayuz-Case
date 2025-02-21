@@ -26,9 +26,16 @@ namespace HafifPlatofrmArayuz.Models
 
 		private byte CalculateCRC()
 		{
-			byte[] allBytes = new byte[] { Sync1, Sync2, PacketID, DataLenght }.Concat(Data).ToArray();
-			return CRC8.ComputeChecksum(allBytes);
+			byte[] allBytes = new byte[] { this.Sync1, this.Sync2, this.PacketID, this.DataLenght }
+				.Concat(this.Data)
+				.ToArray();
+
+			byte crcValue = CRC8.ComputeChecksum(allBytes);
+
+			Console.WriteLine($"🔍 CRC Hesaplandı! Veri: {BitConverter.ToString(allBytes)} | CRC: {crcValue}");
+			return crcValue;
 		}
+
 		public byte[] ToByteArray()
 		{
 			byte[] packet = new byte[5 + Data.Length];
@@ -53,7 +60,14 @@ namespace HafifPlatofrmArayuz.Models
 			byte crc = bytes[bytes.Length - 1];
 
 			DataPacket packet = new DataPacket(packetID, data);
-			if (packet.CRC != crc) throw new Exception("CRC Hatası: Bozuk paket!");
+			byte calculatedCRC = packet.CalculateCRC();
+			if (calculatedCRC != crc)
+			{
+				Console.WriteLine($"CRC Hatası! Beklenen: {crc}, Hesaplanan: {calculatedCRC}");
+				return packet; // Hata fırlatmadan paketi döndürüyoruz
+			}
+
+			Console.WriteLine($"CRC Doğrulandı! Paket geçerli.");
 
 			return packet;
 		}

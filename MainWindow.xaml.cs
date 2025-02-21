@@ -1,4 +1,6 @@
 ﻿using HafifPlatofrmArayuz.Communication;
+using HafifPlatofrmArayuz.Models;
+using HafifPlatofrmArayuz.Services;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,26 +20,48 @@ namespace HafifPlatofrmArayuz
     public partial class MainWindow : Window
     {
         private UdpCommunication udpService;
+        private PacketCapture packetCapture;
 
         public MainWindow()
         {
             InitializeComponent();
             udpService = new UdpCommunication(5000);
-            udpService.DataReceived += OnDataReceived;
-            udpService.StartListening();
+            packetCapture = new PacketCapture();
+
+            udpService.PacketReceived += OnPacketReceived;
+            packetCapture.PacketStatusUpdated += OnPacketStatusUpdated;
+
+			udpService.StartListening();
         }
 
-        private void OnDataReceived(string data)
+        private void OnPacketReceived(DataPacket packet)
         {
             Dispatcher.Invoke(() =>
             {
-                MessageBox.Show($"Veri: {data}");
+                string receivedText = Encoding.UTF8.GetString(packet.Data);
+                MessageBox.Show($"Paket Alındı ID: {packet.PacketID}, Veri: {receivedText}");
+            });
+
+        }
+        private void OnPacketStatusUpdated(string message)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                MessageBox.Show(message);
             });
         }
 
         private void SendBtn(object sender, RoutedEventArgs e)
         {
-            udpService.SendData("127.0.0.1", 5000, "Hi, UDP!");
+            byte[] data = Encoding.UTF8.GetBytes("Test Message");
+            DataPacket packet = new DataPacket(1, data);
+            udpService.SendPacket("127.0.0.1", 5000, packet);
+        }
+
+        private void ResetCountersBtn(object sender, RoutedEventArgs e)
+        {
+            packetCapture.ResetCounters();
+            MessageBox.Show("Sayaçlar sıfırlandı!");
         }
 
         private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)

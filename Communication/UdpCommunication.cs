@@ -48,7 +48,7 @@ namespace HafifPlatofrmArayuz.Communication
 			udpClient?.Close();
 		}
 
-		public void SendData(string ip, int port, DataPacket packet)
+		public void SendPacket(string ip, int port, DataPacket packet)
 		{
 			try
 			{
