@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:HafifPlatofrmArayuz"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="0,0,-113,-135">
         <Button Content="Paket Gönder" Click="SendBtn" Width="120" Height="30" Margin="106,237,574,167" />
         <Button Content="Sayaçları Sıfırla" Click="ResetCountersBtn" Width="140" Height="30" Margin="330,237,330,167" />
         <Button Content="Logları Görüntüle" Click="ShowLogsBtn" Width="140" Height="30" Margin="530,237,130,167" />
+        <Button Content="MATLAB'e Dönüştür" Click="ConvertToMatlabBtn" Width="140" Height="30" Margin="386,239,387,300" RenderTransformOrigin="0.411,0.851" />
     </Grid>
 
 

@@ -72,7 +72,13 @@ namespace HafifPlatofrmArayuz
             MessageBox.Show(logText, "Log Kayıtları");
         }
 
-        private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
+		private void ConvertToMatlabBtn(object sender, RoutedEventArgs e)
+		{
+            LogConverter.ConvertToMatlab();
+            MessageBox.Show("Loglar MATLAB formatına dönüştürüldü");
+		}
+
+		private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {
             udpService.StopListening();
         }
