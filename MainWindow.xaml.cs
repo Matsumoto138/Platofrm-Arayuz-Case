@@ -1,4 +1,5 @@
 ﻿using HafifPlatofrmArayuz.Communication;
+using HafifPlatofrmArayuz.Logging;
 using HafifPlatofrmArayuz.Models;
 using HafifPlatofrmArayuz.Services;
 using System.Text;
@@ -62,6 +63,13 @@ namespace HafifPlatofrmArayuz
         {
             packetCapture.ResetCounters();
             MessageBox.Show("Sayaçlar sıfırlandı!");
+        }
+
+        private void ShowLogsBtn(object sender, RoutedEventArgs e)
+        {
+            string[] logs = Logger.ReadLog();
+            string logText = logs.Length > 0 ? string.Join("\n", logs) : "Kayıtlı Log Bulunmuyor";
+            MessageBox.Show(logText, "Log Kayıtları");
         }
 
         private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)

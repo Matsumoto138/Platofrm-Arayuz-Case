@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Paket Gönder" Click="SendBtn" Width="120" Height="30" />
+        <Button Content="Paket Gönder" Click="SendBtn" Width="120" Height="30" Margin="106,237,574,167" />
         <Button Content="Sayaçları Sıfırla" Click="ResetCountersBtn" Width="140" Height="30" Margin="330,237,330,167" />
+        <Button Content="Logları Görüntüle" Click="ShowLogsBtn" Width="140" Height="30" Margin="530,237,130,167" />
     </Grid>
 
 

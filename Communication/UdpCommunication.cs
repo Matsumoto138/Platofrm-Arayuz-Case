@@ -1,4 +1,5 @@
-﻿using HafifPlatofrmArayuz.Models;
+﻿using HafifPlatofrmArayuz.Logging;
+using HafifPlatofrmArayuz.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace HafifPlatofrmArayuz.Communication
 						UdpReceiveResult receiveResult = await udpClient.ReceiveAsync();
 						DataPacket packet = DataPacket.FromByteArray(receiveResult.Buffer);
 						PacketReceived?.Invoke(packet);
+						Logger.Info($"UDP Alındı -> PaketId: {packet.PacketID}, Veri Uzunluğu: {packet.DataLenght}, ");
 					}
 					catch (Exception e)
 					{
@@ -54,6 +56,7 @@ namespace HafifPlatofrmArayuz.Communication
 			{
 				byte[] bytes = packet.ToByteArray();
 				udpClient.Send(bytes, bytes.Length, new IPEndPoint(IPAddress.Parse(ip), port));
+				Logger.Info($"UDP Gönderildi -> IP: {ip}, Port: {port}, PaketID: {packet.PacketID}");
 			}
 			catch (Exception e)
 			{
