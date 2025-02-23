@@ -25,12 +25,12 @@
                 <!-- Menü Butonları -->
                 <Button Content="Paket Gönder" Click="SendBtn"
                         Background="white" Foreground="Gray" Margin="10" FontSize="14" Height="40"/>
-                <!--<Button Content="Testleri Çalıştır" Click="BtnRunTests_Click"
-                        Background="#4CAF50" Foreground="White" FontSize="14" Height="40" Margin="10"/>-->
+                <Button Content="Testleri Çalıştır" Click="RunTestsBtn"
+                        Background="white" Foreground="Gray" FontSize="14" Height="40" Margin="10"/>
                 <Button Content="Logları Göster" Click="ShowLogsBtn"
                         Background="white" Foreground="Gray" Margin="10" FontSize="14" Height="40" />
-                <!--<Button Content="Test Raporu Oluştur" Click="BtnGenerateReport_Click"
-                        Background="#FF5722" Foreground="White" FontSize="14" Height="40" Margin="10"/>-->
+                <Button Content="Test Raporu Oluştur" Click="GenerateTestReport"
+                        Background="white" Foreground="Gray" FontSize="14" Height="40" Margin="10"/>
             </StackPanel>
         </DockPanel>
 

@@ -1,0 +1,13 @@
+[
+    {
+        "Action": "SendPacket",
+        "Data": "Test Paketi 1"
+    },
+    {
+        "Action": "SendPacket",
+        "Data": "Test Paketi 2"
+    },
+    {
+        "Action": "ShowLogs"
+    }
+]

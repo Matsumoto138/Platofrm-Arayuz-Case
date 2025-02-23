@@ -2,6 +2,7 @@
 using HafifPlatofrmArayuz.Logging;
 using HafifPlatofrmArayuz.Models;
 using HafifPlatofrmArayuz.Services;
+using HafifPlatofrmArayuz.Tests;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,8 +23,9 @@ namespace HafifPlatofrmArayuz
     {
         private UdpCommunication udpService;
         private PacketCapture packetCapture;
+		private TestRunner testRunner;
 
-        public MainWindow()
+		public MainWindow()
         {
             InitializeComponent();
             udpService = new UdpCommunication(5000);
@@ -31,6 +33,8 @@ namespace HafifPlatofrmArayuz
 
             udpService.PacketReceived += OnPacketReceived;
             packetCapture.PacketStatusUpdated += OnPacketStatusUpdated;
+
+			testRunner = new TestRunner(udpService);
 
 			udpService.StartListening();
         }
@@ -77,6 +81,18 @@ namespace HafifPlatofrmArayuz
             LogConverter.ConvertToMatlab();
             MessageBox.Show("Loglar MATLAB formatına dönüştürüldü");
 		}
+
+		private async void RunTestsBtn(object sender, RoutedEventArgs e)
+		{
+			await testRunner.RunTest();
+		}
+
+        private void GenerateTestReport(object sender, RoutedEventArgs e)
+        {
+            string[] logs = Logger.ReadLog();
+            TestReportGenerator.GenerateReport(logs);
+            MessageBox.Show("Test Raporu PDF Olarak Kaydedildi");
+        }
 
 		private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {
