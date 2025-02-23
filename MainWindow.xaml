@@ -6,11 +6,39 @@
         xmlns:local="clr-namespace:HafifPlatofrmArayuz"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Margin="0,0,-113,-135">
-        <Button Content="Paket Gönder" Click="SendBtn" Width="120" Height="30" Margin="106,237,574,167" />
-        <Button Content="Sayaçları Sıfırla" Click="ResetCountersBtn" Width="140" Height="30" Margin="330,237,330,167" />
-        <Button Content="Logları Görüntüle" Click="ShowLogsBtn" Width="140" Height="30" Margin="530,237,130,167" />
-        <Button Content="MATLAB'e Dönüştür" Click="ConvertToMatlabBtn" Width="140" Height="30" Margin="386,239,387,300" RenderTransformOrigin="0.411,0.851" />
+    <Grid>
+        <!-- 2 Sütunlu Ana Layout (Sol Sidebar - Sağ İçerik Alanı) -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <!-- Sidebar -->
+            <ColumnDefinition Width="*"/>
+            <!-- İçerik Alanı -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Sol Sidebar -->
+        <DockPanel Grid.Column="0" Background="#142143">
+            <StackPanel>
+                <!-- Uygulama Adı -->
+                <TextBlock Text="Hafif Platformlar" Foreground="#D8D7DC" FontSize="18" FontWeight="Bold"
+                           HorizontalAlignment="Center" Margin="10"/>
+                <Border BorderThickness="0.2" BorderBrush="White" />
+                <!-- Menü Butonları -->
+                <Button Content="Paket Gönder" Click="SendBtn"
+                        Background="white" Foreground="Gray" Margin="10" FontSize="14" Height="40"/>
+                <!--<Button Content="Testleri Çalıştır" Click="BtnRunTests_Click"
+                        Background="#4CAF50" Foreground="White" FontSize="14" Height="40" Margin="10"/>-->
+                <Button Content="Logları Göster" Click="ShowLogsBtn"
+                        Background="white" Foreground="Gray" Margin="10" FontSize="14" Height="40" />
+                <!--<Button Content="Test Raporu Oluştur" Click="BtnGenerateReport_Click"
+                        Background="#FF5722" Foreground="White" FontSize="14" Height="40" Margin="10"/>-->
+            </StackPanel>
+        </DockPanel>
+
+        <!-- Sağ İçerik Alanı -->
+        <Grid Grid.Column="1" Background="White" Name="ContentArea">
+            <TextBlock Text="Hoş Geldiniz! İşlem yapmak için soldaki menüyü kullanın." 
+                       FontSize="16" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
     </Grid>
 
 
