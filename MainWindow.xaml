@@ -7,15 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <!-- 2 Sütunlu Ana Layout (Sol Sidebar - Sağ İçerik Alanı) -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <!-- Sidebar -->
             <ColumnDefinition Width="*"/>
-            <!-- İçerik Alanı -->
         </Grid.ColumnDefinitions>
 
-        <!-- Sol Sidebar -->
+        <!-- Sidebar -->
         <DockPanel Grid.Column="0" Background="#142143">
             <StackPanel>
                 <!-- Uygulama Adı -->
@@ -31,18 +28,33 @@
                         Background="white" Foreground="Gray" Margin="10" FontSize="14" Height="40" />
                 <Button Content="Test Raporu Oluştur" Click="GenerateTestReport"
                         Background="white" Foreground="Gray" FontSize="14" Height="40" Margin="10"/>
+                <Button Content="MATLAB'e Dönüştür" Click="ConvertToMatlabBtn"
+                        Background="white" Foreground="Gray" FontSize="14" Height="40" Margin="10"/>
+                <Button Content="Sayaçları Sıfırla" Click="ResetCountersBtn"
+                        Background="white" Foreground="Gray" FontSize="14" Height="40" Margin="10"/>
+
             </StackPanel>
+            
         </DockPanel>
 
-        <!-- Sağ İçerik Alanı -->
+        <!-- İçerik Alanı -->
         <Grid Grid.Column="1" Background="White" Name="ContentArea" Margin="10">
             <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            
+            <!-- Sayaç Alanı -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10">
+                <TextBlock Text="Başarılı Paketler: " FontSize="14" FontWeight="Bold"/>
+                <TextBlock Name="SuccessCountText" Text="0" FontSize="14" Foreground="LightGreen"/>
 
+                <TextBlock Text="Hatalı Paketler: " FontSize="14" FontWeight="Bold" Margin="20,0,0,0"/>
+                <TextBlock Name="ErrorCountText" Text="0" FontSize="14" Foreground="Red" />
+            </StackPanel>
             <!-- Paket Gönderme Alanı -->
-            <Border BorderBrush="#2196F3" BorderThickness="1" CornerRadius="10" Padding="10" Margin="10">
+            <Border Grid.Row="1" BorderBrush="#2196F3" BorderThickness="1" CornerRadius="10" Padding="10" Margin="10">
                 <StackPanel>
                     <TextBlock Text="📤 Gönderilen Paket İçeriği" FontSize="16" FontWeight="Bold"/>
                     <TextBox Name="SentPacketContent" IsReadOnly="True" Background="#F7F7F7" FontSize="14" Height="50"/>
@@ -50,7 +62,7 @@
             </Border>
 
             <!-- Log Alanı -->
-            <Border Grid.Row="1" BorderBrush="#3F51B5" BorderThickness="1" CornerRadius="10" Padding="10" Margin="10">
+            <Border Grid.Row="2" BorderBrush="#3F51B5" BorderThickness="1" CornerRadius="10" Padding="10" Margin="10">
                 <StackPanel>
                     <TextBlock Text="📜 Canlı Loglar" FontSize="16" FontWeight="Bold"/>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="200">

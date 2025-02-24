@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace HafifPlatofrmArayuz.Logging
 {
+	// Loglama işlemi bu sayfada gerçekleşiyor. Paket gönderildiği zaman tüm loglar proje dizininde "/Logs/comunication_log.txt" dosyasında saklanır.
 	public static class Logger
 	{
-		private static readonly string logDirectory = "logs";
+		private static readonly string logDirectory = "../../../Logs";
 		private static readonly string logFilePath = Path.Combine(logDirectory, "comunication_log.txt");
 
 		static Logger()

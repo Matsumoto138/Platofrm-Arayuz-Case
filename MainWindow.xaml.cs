@@ -16,14 +16,15 @@ using System.Windows.Shapes;
 
 namespace HafifPlatofrmArayuz
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+	// Bu sayfada UI ile bağlantılı şekilde ana işlemler gerçekleştirilir
     public partial class MainWindow : Window
     {
         private UdpCommunication udpService;
         private PacketCapture packetCapture;
 		private TestRunner testRunner;
+
+		private int successCount = 0;
+		private int errorCount = 0;
 
 		public MainWindow()
         {
@@ -61,14 +62,48 @@ namespace HafifPlatofrmArayuz
             string packetData = "Test Message";
 			byte[] data = Encoding.UTF8.GetBytes(packetData);
             DataPacket packet = new DataPacket(1, data);
-            udpService.SendPacket("127.0.0.1", 5000, packet);
-            UpdateSentPacketUI(packetData);
-        }
 
-        private void ResetCountersBtn(object sender, RoutedEventArgs e)
+			try
+			{
+				udpService.SendPacket("127.0.0.1", 5000, packet);
+				UpdateSentPacketUI(packetData);
+				UpdateSuccessCounter();
+			}
+			catch (Exception)
+			{
+				UpdateErrorCounter();
+			}
+
+            
+        }
+		private void UpdateSuccessCounter()
+		{
+			successCount++;
+			Dispatcher.Invoke(() =>
+			{
+				SuccessCountText.Text = successCount.ToString();
+			});
+		}
+
+		private void UpdateErrorCounter()
+		{
+			errorCount++;
+			Dispatcher.Invoke(() =>
+			{
+				ErrorCountText.Text = errorCount.ToString();
+			});
+		}
+
+		private void ResetCountersBtn(object sender, RoutedEventArgs e)
         {
-            packetCapture.ResetCounters();
-            MessageBox.Show("Sayaçlar sıfırlandı!");
+			successCount = 0;
+			errorCount = 0;
+			Dispatcher.Invoke(() =>
+			{
+				SuccessCountText.Text = "0";
+				ErrorCountText.Text = "0";
+			});
+			MessageBox.Show("Sayaçlar sıfırlandı!");
         }
 
         private void ShowLogsBtn(object sender, RoutedEventArgs e)

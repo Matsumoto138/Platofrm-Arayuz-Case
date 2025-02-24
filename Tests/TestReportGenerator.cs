@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace HafifPlatofrmArayuz.Tests
 {
+	// Bu sayfada yapılan testlerin log kayıtlarının yer aldığı bir pdf doküman oluşturulur.
+	// Bu doküman proje dizininde "/Tests/TestReport.pdf" isimli dosyaya kaydedilir.
 	public static class TestReportGenerator
 	{
 		private static readonly string reportFilePath = "../../../Tests/TestReport.pdf";

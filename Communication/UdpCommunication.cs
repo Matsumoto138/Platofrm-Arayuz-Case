@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace HafifPlatofrmArayuz.Communication
 {
+	// UDP Paket gönderimi işlemleri bu dosya üzerinden gerçekleşiyor.
 	public class UdpCommunication
 	{
 		private UdpClient udpClient;

@@ -32,7 +32,7 @@ namespace HafifPlatofrmArayuz.Models
 
 			byte crcValue = CRC8.ComputeChecksum(allBytes);
 
-			Console.WriteLine($"🔍 CRC Hesaplandı! Veri: {BitConverter.ToString(allBytes)} | CRC: {crcValue}");
+			Console.WriteLine($"CRC Hesaplandı! Veri: {BitConverter.ToString(allBytes)} | CRC: {crcValue}");
 			return crcValue;
 		}
 
@@ -64,7 +64,7 @@ namespace HafifPlatofrmArayuz.Models
 			if (calculatedCRC != crc)
 			{
 				Console.WriteLine($"CRC Hatası! Beklenen: {crc}, Hesaplanan: {calculatedCRC}");
-				return packet; // Hata fırlatmadan paketi döndürüyoruz
+				return packet;
 			}
 
 			Console.WriteLine($"CRC Doğrulandı! Paket geçerli.");

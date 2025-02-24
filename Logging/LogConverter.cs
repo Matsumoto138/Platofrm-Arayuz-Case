@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace HafifPlatofrmArayuz.Logging
 {
+	// Bu sayfa tüm logların MATLAB dosyasına döünşümünü sağlar.
+	// Dönüştürülen loglar proje dizininde "/MATLAB_Logs/log_data.mat" dosyasında kayıtlı tutulur.
 	public static class LogConverter
 	{
-		private static readonly string matlabFolder = "MATLAB_Logs";
+		private static readonly string matlabFolder = "../../../MATLAB_Logs";
 		private static readonly string matlabFilePath = Path.Combine(matlabFolder, "log_data.mat");
 
 		static LogConverter()

@@ -12,6 +12,7 @@ using System.Windows;
 
 namespace HafifPlatofrmArayuz.Tests
 {
+	// Bu sayfada proje testleri gerçekleştirilir. Test paketi gönderilir ve sonuçlar log kaydı olarak işlenir.
 	public class TestRunner
 	{
 		private readonly UdpCommunication udpCommunication;
@@ -47,7 +48,6 @@ namespace HafifPlatofrmArayuz.Tests
 					case "ShowLogs":
 						string[] logs = Logger.ReadLog();
 						string logText = logs.Length > 0 ? string.Join("\n", logs) : "Kayıtlı log bulunamadı!";
-						MessageBox.Show(logText, "Log Kayıtları");
 						Logger.Info($"🛠 Test: Loglar gösterildi.");
 						break;
 				}
