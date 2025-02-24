@@ -35,9 +35,29 @@
         </DockPanel>
 
         <!-- Sağ İçerik Alanı -->
-        <Grid Grid.Column="1" Background="White" Name="ContentArea">
-            <TextBlock Text="Hoş Geldiniz! İşlem yapmak için soldaki menüyü kullanın." 
-                       FontSize="16" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid Grid.Column="1" Background="White" Name="ContentArea" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Paket Gönderme Alanı -->
+            <Border BorderBrush="#2196F3" BorderThickness="1" CornerRadius="10" Padding="10" Margin="10">
+                <StackPanel>
+                    <TextBlock Text="📤 Gönderilen Paket İçeriği" FontSize="16" FontWeight="Bold"/>
+                    <TextBox Name="SentPacketContent" IsReadOnly="True" Background="#F7F7F7" FontSize="14" Height="50"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Log Alanı -->
+            <Border Grid.Row="1" BorderBrush="#3F51B5" BorderThickness="1" CornerRadius="10" Padding="10" Margin="10">
+                <StackPanel>
+                    <TextBlock Text="📜 Canlı Loglar" FontSize="16" FontWeight="Bold"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="200">
+                        <ListBox Name="LogListBox" Background="White" FontSize="14"/>
+                    </ScrollViewer>
+                </StackPanel>
+            </Border>
         </Grid>
     </Grid>
 

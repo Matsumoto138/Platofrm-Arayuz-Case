@@ -58,9 +58,11 @@ namespace HafifPlatofrmArayuz
 
         private void SendBtn(object sender, RoutedEventArgs e)
         {
-            byte[] data = Encoding.UTF8.GetBytes("Test Message");
+            string packetData = "Test Message";
+			byte[] data = Encoding.UTF8.GetBytes(packetData);
             DataPacket packet = new DataPacket(1, data);
             udpService.SendPacket("127.0.0.1", 5000, packet);
+            UpdateSentPacketUI(packetData);
         }
 
         private void ResetCountersBtn(object sender, RoutedEventArgs e)
@@ -71,11 +73,16 @@ namespace HafifPlatofrmArayuz
 
         private void ShowLogsBtn(object sender, RoutedEventArgs e)
         {
+            LogListBox.Items.Clear(); // Eski logları temizle
             string[] logs = Logger.ReadLog();
-            string logText = logs.Length > 0 ? string.Join("\n", logs) : "Kayıtlı Log Bulunmuyor";
-            MessageBox.Show(logText, "Log Kayıtları");
-        }
+            int maxLogs = 100; // UI içinde göstereceğimiz maksimum log sayısı
 
+            foreach (var log in logs.Skip(Math.Max(0, logs.Length - maxLogs)))
+            {
+                UpdateLogUI(log);
+
+            }
+        }
 		private void ConvertToMatlabBtn(object sender, RoutedEventArgs e)
 		{
             LogConverter.ConvertToMatlab();
@@ -94,9 +101,26 @@ namespace HafifPlatofrmArayuz
             MessageBox.Show("Test Raporu PDF Olarak Kaydedildi");
         }
 
+		private void UpdateSentPacketUI(string packetContent)
+		{
+			Dispatcher.Invoke(() =>
+			{
+				SentPacketContent.Text = packetContent;
+			});
+		}
+
+		private void UpdateLogUI(string logMessage)
+		{
+			Dispatcher.Invoke(() =>
+			{
+				LogListBox.Items.Add(logMessage);
+				LogListBox.ScrollIntoView(LogListBox.Items[LogListBox.Items.Count - 1]);
+			});
+		}
+
 		private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            udpService.StopListening();
-        }
-    }
+		{
+			udpService.StopListening();
+		}
+	}
 }
